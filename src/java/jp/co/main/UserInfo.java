@@ -6,6 +6,7 @@
 package jp.co.main;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -22,28 +25,39 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author sac
  */
 @Entity
-@Table(name = "userInfo")
+@Table(name = "user_info")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "UserInfo.findAll", query = "SELECT u FROM UserInfo u"),
     @NamedQuery(name = "UserInfo.findById", query = "SELECT u FROM UserInfo u WHERE u.id = :id"),
     @NamedQuery(name = "UserInfo.findByPassword", query = "SELECT u FROM UserInfo u WHERE u.password = :password"),
-    @NamedQuery(name = "UserInfo.findByName", query = "SELECT u FROM UserInfo u WHERE u.name = :name")})
+    @NamedQuery(name = "UserInfo.findByName", query = "SELECT u FROM UserInfo u WHERE u.name = :name"),
+    @NamedQuery(name = "UserInfo.findByCreateTimestamp", query = "SELECT u FROM UserInfo u WHERE u.createTimestamp = :createTimestamp"),
+    @NamedQuery(name = "UserInfo.findByUpdateTimestamp", query = "SELECT u FROM UserInfo u WHERE u.updateTimestamp = :updateTimestamp"),
+    @NamedQuery(name = "UserInfo.findByDeleteFlg", query = "SELECT u FROM UserInfo u WHERE u.deleteFlg = :deleteFlg")})
 public class UserInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 2147483647)
-    @Column(name = "ID")
+    @Size(min = 1, max = 5)
+    @Column(name = "id")
     private String id;
-    @Size(max = 2147483647)
+    @Size(max = 8)
     @Column(name = "password")
     private String password;
-    @Size(max = 2147483647)
+    @Size(max = 32)
     @Column(name = "name")
     private String name;
+    @Column(name = "create_timestamp")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createTimestamp;
+    @Column(name = "update_timestamp")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updateTimestamp;
+    @Column(name = "delete_flg")
+    private Boolean deleteFlg;
 
     public UserInfo() {
     }
@@ -74,6 +88,30 @@ public class UserInfo implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Date getCreateTimestamp() {
+        return createTimestamp;
+    }
+
+    public void setCreateTimestamp(Date createTimestamp) {
+        this.createTimestamp = createTimestamp;
+    }
+
+    public Date getUpdateTimestamp() {
+        return updateTimestamp;
+    }
+
+    public void setUpdateTimestamp(Date updateTimestamp) {
+        this.updateTimestamp = updateTimestamp;
+    }
+
+    public Boolean getDeleteFlg() {
+        return deleteFlg;
+    }
+
+    public void setDeleteFlg(Boolean deleteFlg) {
+        this.deleteFlg = deleteFlg;
     }
 
     @Override

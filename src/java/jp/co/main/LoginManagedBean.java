@@ -5,12 +5,14 @@
  */
 package jp.co.main;
 
-import javax.activation.DataSource;
+import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 
 import javax.inject.Named;
+
 
 /**
  *
@@ -19,7 +21,7 @@ import javax.inject.Named;
 @Named(value = "userMnagerManagedBean")
 @ManagedBean
 @RequestScoped
-public class userMnagerManagedBean {
+public class LoginManagedBean {
     private String inputTitle = "最初の画面です"; 
     public String getInputTitle() {
         return inputTitle;
@@ -68,8 +70,11 @@ public class userMnagerManagedBean {
         this.msg = msg;
     }
     
-    public userMnagerManagedBean() {
+    public LoginManagedBean() {
     }
+    
+    @Inject 
+    UserInfoFacade userInfoFacade;
     
     @PostConstruct
     public void init(){
@@ -80,9 +85,12 @@ public class userMnagerManagedBean {
     }
     
     public String login(){
-        UserInfo _userInfo = new UserInfo();
-        String userId =  _userInfo.getId();
-        return "output.xhtml";
+        this.msg =  this.name + "は" + String.valueOf(this.age)  + "歳です。";
+        List<UserInfo> userInfoList;
+        userInfoList = userInfoFacade.findByID("10298");
+        userInfoList = userInfoFacade.findAllUser();
+        
+        return "userList.xhtml";
     }
     
 }
