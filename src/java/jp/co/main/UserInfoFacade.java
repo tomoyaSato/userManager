@@ -33,7 +33,8 @@ public class UserInfoFacade extends AbstractFacade<UserInfo> {
     }
     public List<UserInfo> findByID(String ID){
         try{
-            return em.createNativeQuery("SELECT * FROM \"public\".user_info").getResultList();
+//            return em.createNativeQuery("SELECT * FROM \"public\".user_info").getResultList();
+            return em.createNamedQuery("UserInfo.findById").setParameter("id", ID).getResultList();
         }
         catch(Exception ex){
             throw ex;

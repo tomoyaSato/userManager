@@ -18,7 +18,7 @@ import javax.inject.Named;
  *
  * @author sac
  */
-@Named(value = "userMnagerManagedBean")
+@Named(value = "loginManagedBean")
 @ManagedBean
 @RequestScoped
 public class LoginManagedBean {
@@ -70,6 +70,23 @@ public class LoginManagedBean {
         this.msg = msg;
     }
     
+    private boolean loginFlg;
+    public boolean isLoginFlg() {
+        return loginFlg;
+    }
+    public void setLoginFlg(boolean loginFlg) {
+        this.loginFlg = loginFlg;
+    }
+    
+    private boolean loginErrFlg = false;
+    public boolean isLoginErrFlg() {
+        return loginErrFlg;
+    }
+    public void setLoginErrFlg(boolean loginErrFlg) {
+        this.loginErrFlg = loginErrFlg;
+    }
+    
+    
     public LoginManagedBean() {
     }
     
@@ -78,19 +95,38 @@ public class LoginManagedBean {
     
     @PostConstruct
     public void init(){
-    }
-    public String send(){		
-        this.msg =  this.name + "は" + String.valueOf(this.age)  + "歳です。";	
-        return "output.xhtml";
+        this.loginErrFlg = false;
     }
     
     public String login(){
-        this.msg =  this.name + "は" + String.valueOf(this.age)  + "歳です。";
+        // IDからユーザー情報を取得しパスワードの照合を行う
         List<UserInfo> userInfoList;
-        userInfoList = userInfoFacade.findByID("10298");
-        userInfoList = userInfoFacade.findAllUser();
+        userInfoList = userInfoFacade.findByID(this.id);
+        this.loginFlg = false;
+        this.loginErrFlg = false;
         
-        return "userList.xhtml";
+        if(userInfoList.size() != 1){
+            this.loginErrFlg = true;
+            return "login.xhtml";
+        }
+            
+        if(userInfoList.get(0).getPassword().equals(this.password)){
+            this.loginFlg = true;
+            this.loginErrFlg = false;
+            return "userList.xhtml";
+        }else{
+            this.loginErrFlg = true;
+            return "login.xhtml";
+        }    
     }
-    
+    public String moveLoginPage(){
+        return "login.xhtml";
+    }   
+    public String userListloginCheck(){
+        if(this.loginFlg)
+        {
+            return "userList.xhtml";
+        }
+        return "warning.xhtml";
+    }
 }

@@ -5,21 +5,40 @@
  */
 package jp.co.main;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.ManagedBean;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
+
 
 /**
  *
  * @author sac
  */
 @Named(value = "userListManagedBean")
-@Dependent
+@ManagedBean
+@RequestScoped
 public class UserListManagedBean {
-
-    /**
+       /**
      * Creates a new instance of UserListManagedBean
      */
-    public UserListManagedBean() {
+    private List<userListTableBean> userDataList = null;
+    public List<userListTableBean> getUserDataList() {
+        return userDataList;
+    }
+    public void setUserDataList(List<userListTableBean> userDataList) {
+        this.userDataList = userDataList;
     }
     
+    public UserListManagedBean() {
+        userDataList = new ArrayList<>();
+
+        userDataList.add(new userListTableBean(false,"00001", "えんぴつ"));
+        userDataList.add(new userListTableBean(false,"00002", "けしごむ"));
+        userDataList.add(new userListTableBean(false,"00003", "ノート"));
+    }
 }

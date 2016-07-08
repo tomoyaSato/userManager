@@ -1,13 +1,57 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>ユーザ情報管理システム</title>
         <meta charset="utf-8"/>
+        <script language="JavaScript">
+            window.onload = function(){    
+                loginErrAlert();              
+            };
+            function loginErrAlert(){
+                if(#{loginManagedBean.loginFlg}){
+                    return;
+                }
+                alert("ログインされていません。ログイン画面へ戻ります。");
+                window.location.href = "#{loginManagedBean.moveLoginPage()}";
+            }
+        </script>
     </h:head>
     <h:body>
-        <h:outputText value="#{userMnagerManagedBean.msg}" />
+        <f:metadata>
+            <f:viewAction action="#{loginManagedBean.userListloginCheck()}"/>
+        </f:metadata>
+        <h3>ユーザーリスト一覧</h3>     
+        <h:dataTable var="recordData" value="#{userListManagedBean.userDataList}"
+                    columnClasses="column-class1  column-class2"
+                    rowClasses="row-class1 row-class2"
+                    styleClass="table-class"
+                    border="1"
+                    cellspacing="0">
+                    <h:column headerClass="header-code-class">
+                        <f:facet name="header">
+                            コード
+                        </f:facet>
+                        <h:outputText value="#{recordData.id}" />
+                    </h:column>
+                    <h:column headerClass="header-name-class">
+                        <f:facet name="header">
+                            商品名
+                        </f:facet>
+                        <h:outputText value="#{recordData.id}" />
+                    </h:column>
+                    <h:column headerClass="header-price-class">
+                        <f:facet name="header">
+                            価格
+                        </f:facet>
+                        <h:outputText value="#{recordData.price}" />
+                        <f:facet name="footer">
+                            価格フッター
+                        </f:facet>
+                    </h:column>
+                </h:dataTable>
     </h:body>
 </html>
 
