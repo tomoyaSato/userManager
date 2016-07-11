@@ -3,21 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/dev/work/userManager/src/java/jp/co/main/UserListManagedBean.java</file>
-            <file>file:/C:/dev/work/userManager/web/WEB-INF/faces-config.xml</file>
-            <file>file:/C:/dev/work/userManager/src/java/jp/co/main/LoginManagedBean.java</file>
-            <file>file:/C:/dev/work/userManager/src/java/jp/co/main/UserInfo.java</file>
-            <file>file:/C:/dev/work/userManager/web/WEB-INF/glassfish-resources.xml</file>
             <file>file:/C:/dev/work/userManager/src/java/jp/co/main/UserInfoFacade.java</file>
-            <file>file:/C:/dev/work/userManager/src/java/jp/co/main/userListTableBean.java</file>
-            <file>file:/C:/dev/work/userManager/web/WEB-INF/web.xml</file>
-            <file>file:/C:/dev/work/userManager/src/conf/MANIFEST.MF</file>
-            <file>file:/C:/dev/work/userManager/web/userList.xhtml</file>
-            <file>file:/C:/dev/work/userManager/src/java/jp/co/main/AbstractFacade.java</file>
-            <file>file:/C:/dev/work/userManager/src/conf/persistence.xml</file>
-            <file>file:/C:/dev/work/userManager/src/java/jp/co/main/UserInfoDetailManagedBean.java</file>
-            <file>file:/C:/dev/work/userManager/web/login.xhtml</file>
-            <file>file:/C:/dev/work/userManager/web/warning.xhtml</file>
+            <file>file:/C:/dev/work/userManager/src/java/jp/co/main/UserListManagedBean.java</file>
+            <file>file:/C:/dev/work/userManager/src/java/jp/co/main/LoginManagedBean.java</file>
         </group>
     </open-files>
 </project-private>

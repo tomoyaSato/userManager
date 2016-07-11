@@ -40,4 +40,11 @@ public class UserInfoFacade extends AbstractFacade<UserInfo> {
             throw ex;
         }
     }
+    public List<UserInfo> findByDeleteFlg(boolean deleteFlg){
+        try{
+            return em.createNamedQuery("UserInfo.findByDeleteFlg").setParameter("deleteFlg", deleteFlg).getResultList();
+        }catch(Exception ex){
+            throw ex;
+        }
+    }
 }

@@ -10,12 +10,20 @@ package jp.co.main;
  * @author sac
  */
 public class userListTableBean {
-    private final boolean radioButton;
+
     private final String id;
+
+    public String getId() {
+        return id;
+    }
+
     private final String name;
 
-    public userListTableBean(final boolean radioButton,final String id, final String name) {
-        this.radioButton = radioButton;
+    public String getName() {
+        return name;
+    }
+
+    public userListTableBean(final String id, final String name) {
         this.id = id;
         this.name = name;
     }

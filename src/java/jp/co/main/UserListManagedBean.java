@@ -7,12 +7,14 @@ package jp.co.main;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 import javax.inject.Named;
+import org.apache.jasper.tagplugins.jstl.ForEach;
 
 
 /**
@@ -33,12 +35,24 @@ public class UserListManagedBean {
     public void setUserDataList(List<userListTableBean> userDataList) {
         this.userDataList = userDataList;
     }
+   
+    @Inject 
+    UserInfoFacade userInfoFacade;
     
     public UserListManagedBean() {
+        setUserInfoList();
+    }
+    private void setUserInfoList(){
         userDataList = new ArrayList<>();
-
-        userDataList.add(new userListTableBean(false,"00001", "えんぴつ"));
-        userDataList.add(new userListTableBean(false,"00002", "けしごむ"));
-        userDataList.add(new userListTableBean(false,"00003", "ノート"));
+        List<UserInfo> userInfoList;
+        try{
+            userInfoList = userInfoFacade.findByDeleteFlg(false);
+        }
+        catch(Exception ex){
+            throw ex;
+        }
+        userInfoList.stream().forEach((UserInfo userInfo) -> {
+            userDataList.add(new userListTableBean(userInfo.getId(), userInfo.getName()));
+        });
     }
 }

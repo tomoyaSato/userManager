@@ -6,12 +6,13 @@
     <h:head>
         <title>ユーザ情報管理システム</title>
         <meta charset="utf-8"/>
+        <link rel="stylesheet" type="text/css" href="CSS/userList.css"/>
         <script language="JavaScript">
-            window.onload = function(){    
-                loginErrAlert();              
+            window.onload = function () {
+                loginErrAlert();
             };
-            function loginErrAlert(){
-                if(#{loginManagedBean.loginFlg}){
+            function loginErrAlert() {
+                if (#{loginManagedBean.loginFlg}) {
                     return;
                 }
                 alert("ログインされていません。ログイン画面へ戻ります。");
@@ -23,35 +24,37 @@
         <f:metadata>
             <f:viewAction action="#{loginManagedBean.userListloginCheck()}"/>
         </f:metadata>
-        <h3>ユーザーリスト一覧</h3>     
-        <h:dataTable var="recordData" value="#{userListManagedBean.userDataList}"
-                    columnClasses="column-class1  column-class2"
-                    rowClasses="row-class1 row-class2"
-                    styleClass="table-class"
-                    border="1"
-                    cellspacing="0">
-                    <h:column headerClass="header-code-class">
-                        <f:facet name="header">
-                            コード
-                        </f:facet>
-                        <h:outputText value="#{recordData.id}" />
-                    </h:column>
-                    <h:column headerClass="header-name-class">
-                        <f:facet name="header">
-                            商品名
-                        </f:facet>
-                        <h:outputText value="#{recordData.id}" />
-                    </h:column>
-                    <h:column headerClass="header-price-class">
-                        <f:facet name="header">
-                            価格
-                        </f:facet>
-                        <h:outputText value="#{recordData.price}" />
-                        <f:facet name="footer">
-                            価格フッター
-                        </f:facet>
-                    </h:column>
-                </h:dataTable>
+        <h:commandButton id="logoutButton" value="ログアウト" />
+        <h3>ユーザー情報一覧</h3>     
+        <h:dataTable value="#{userListManagedBean.userDataList}" var="data"
+                     border="1" cellpadding="0" cellspacing="0"
+                     rowClasses="data" columnClasses="center,center"
+                     captionClass="caption" headerClass="header" footerClass="footer">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="選択"/>
+                </f:facet>
+                <input type="radio" name="q1" value="#{data.id}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="ID"/>
+                </f:facet>
+                <h:outputText value="#{data.id}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="ユーザー名"/>
+                </f:facet>
+                <h:outputText value="#{data.name}"/>
+            </h:column>
+
+        </h:dataTable>
+        <h:commandButton value="登録"  />
+        <h:commandButton value="変更"  />
+        <h:commandButton value="削除"  />
     </h:body>
 </html>
 

@@ -109,7 +109,7 @@ public class LoginManagedBean {
             this.loginErrFlg = true;
             return "login.xhtml";
         }
-            
+
         if(userInfoList.get(0).getPassword().equals(this.password)){
             this.loginFlg = true;
             this.loginErrFlg = false;
