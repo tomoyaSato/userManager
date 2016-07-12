@@ -15,19 +15,19 @@ import javax.inject.Inject;
 
 import javax.inject.Named;
 import org.apache.jasper.tagplugins.jstl.ForEach;
-
+import org.jboss.weld.context.RequestContext;
 
 /**
  *
  * @author sac
  */
 @Named(value = "userListManagedBean")
-@ManagedBean
 @RequestScoped
 public class UserListManagedBean {
-       /**
-     * Creates a new instance of UserListManagedBean
-     */
+    
+    @Inject 
+    UserInfoFacade userInfoFacade;
+    
     private List<userListTableBean> userDataList = null;
     public List<userListTableBean> getUserDataList() {
         return userDataList;
@@ -36,21 +36,35 @@ public class UserListManagedBean {
         this.userDataList = userDataList;
     }
    
-    @Inject 
-    UserInfoFacade userInfoFacade;
+    private String testStr;
+
+    public String getTestStr() {
+        return testStr;
+    }
+
+    public void setTestStr(String testStr) {
+        this.testStr = testStr;
+    }
+    
+    
+    @PostConstruct
+    public void init(){
+        setUserInfoList();
+    }
     
     public UserListManagedBean() {
-        setUserInfoList();
     }
     private void setUserInfoList(){
         userDataList = new ArrayList<>();
         List<UserInfo> userInfoList;
         try{
+            // 削除されてないユーザーを全て取得する
             userInfoList = userInfoFacade.findByDeleteFlg(false);
         }
         catch(Exception ex){
             throw ex;
         }
+        // 画面ユーザー一覧表示用リストへデータをセット
         userInfoList.stream().forEach((UserInfo userInfo) -> {
             userDataList.add(new userListTableBean(userInfo.getId(), userInfo.getName()));
         });

@@ -10,3 +10,13 @@ and open the template in the editor.
 h3{
     color: #6666ff;
 }
+
+table, td, th { 
+    border: 1px #6666ff solid;
+    border-collapse: collapse;
+}
+
+font.title{
+    font-size: large;
+}
+

@@ -22,6 +22,10 @@ import javax.inject.Named;
 @ManagedBean
 @RequestScoped
 public class LoginManagedBean {
+    
+    @Inject 
+    UserInfoFacade userInfoFacade;
+    
     private String inputTitle = "最初の画面です"; 
     public String getInputTitle() {
         return inputTitle;
@@ -90,8 +94,7 @@ public class LoginManagedBean {
     public LoginManagedBean() {
     }
     
-    @Inject 
-    UserInfoFacade userInfoFacade;
+    
     
     @PostConstruct
     public void init(){
