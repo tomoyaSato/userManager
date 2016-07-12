@@ -34,7 +34,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "UserInfo.findByName", query = "SELECT u FROM UserInfo u WHERE u.name = :name"),
     @NamedQuery(name = "UserInfo.findByCreateTimestamp", query = "SELECT u FROM UserInfo u WHERE u.createTimestamp = :createTimestamp"),
     @NamedQuery(name = "UserInfo.findByUpdateTimestamp", query = "SELECT u FROM UserInfo u WHERE u.updateTimestamp = :updateTimestamp"),
-    @NamedQuery(name = "UserInfo.findByDeleteFlg", query = "SELECT u FROM UserInfo u WHERE u.deleteFlg = :deleteFlg")})
+    @NamedQuery(name = "UserInfo.findByDeleteFlg", query = "SELECT u FROM UserInfo u WHERE u.deleteFlg = :deleteFlg"),
+    @NamedQuery(name = "UserInfo.getMaxId", query = "SELECT MAX(u.id) FROM UserInfo u")})
 public class UserInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -114,6 +115,21 @@ public class UserInfo implements Serializable {
         this.deleteFlg = deleteFlg;
     }
 
+    public void setAllParam(String  id,
+                              String  password,
+                              String  name,
+                              Date    createTimestamp,
+                              Date    updateTimestamp,
+                              Boolean deleteFlg) {
+        
+        this.id              = id;
+        this.password        = password;
+        this.name            = name;
+        this.createTimestamp = createTimestamp;
+        this.updateTimestamp = updateTimestamp;
+        this.deleteFlg       = deleteFlg;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -138,5 +154,5 @@ public class UserInfo implements Serializable {
     public String toString() {
         return "jp.co.main.UserInfo[ id=" + id + " ]";
     }
-    
+
 }

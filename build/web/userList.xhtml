@@ -7,54 +7,55 @@
         <title>ユーザ情報管理システム</title>
         <meta charset="utf-8"/>
         <link rel="stylesheet" type="text/css" href="CSS/userList.css"/>
-        <script language="JavaScript">
-            window.onload = function () {
-                loginErrAlert();
-            };
-            function loginErrAlert() {
-                if (#{loginManagedBean.loginFlg}) {
-                    return;
-                }
-                alert("ログインされていません。ログイン画面へ戻ります。");
-                window.location.href = "#{loginManagedBean.moveLoginPage()}";
-            }
-        </script>
+        
     </h:head>
     <h:body>
-        <f:metadata>
-            <f:viewAction action="#{loginManagedBean.userListloginCheck()}"/>
-        </f:metadata>
-        <font class="title">ユーザー情報一覧</font>
-        <h:commandButton id="logoutButton" value="ログアウト" />
-             
-        <h:dataTable value="#{userListManagedBean.userDataList}" var="data"
-                     rowClasses="data" columnClasses="center,center"
-                     captionClass="caption" headerClass="header" footerClass="footer">
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="選択"/>
-                </f:facet>
-                <input type="radio" name="q1" value="#{data.id}"/>
-            </h:column>
+        <h:form>
+            <f:metadata>
+                <f:viewAction action="#{loginManagedBean.userListloginCheck()}"/>
+            </f:metadata>
+            <font class="title">ユーザー情報一覧</font>
+            <h:commandButton id="logoutButton" value="ログアウト" />
 
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="ID"/>
-                </f:facet>
-                <h:outputText value="#{data.id}"/>
-            </h:column>
+            <h:dataTable value="#{userListManagedBean.userDataList}" var="data"
+                         rowClasses="data" columnClasses="center,center"
+                         captionClass="caption" headerClass="header" footerClass="footer">
 
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="ユーザー名"/>
-                </f:facet>
-                <h:outputText value="#{data.name}"/>
-            </h:column>
 
-        </h:dataTable>
-        <h:commandButton value="登録"  />
-        <h:commandButton value="変更"  />
-        <h:commandButton value="削除"  />
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ID"/>
+                    </f:facet>
+                    <h:outputText value="#{data.id}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ユーザー名"/>
+                    </f:facet>
+                    <h:outputText value="#{data.name}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="変更"/>
+                    </f:facet>
+                    <h:commandButton value="変更" action="#{userInfoDetailManagedBean.moveUserInfoDetail(1)}">
+                        <f:setPropertyActionListener target="#{userInfoDetailManagedBean.id}" value="#{data.id}" />
+                    </h:commandButton>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="削除"/>
+                    </f:facet>
+                    <h:commandButton value="削除" action="#{userInfoDetailManagedBean.moveUserInfoDetail(1)}">
+                        <f:setPropertyActionListener target="#{userInfoDetailManagedBean.id}" value="#{data.id}" />
+                    </h:commandButton>
+                </h:column>
+            </h:dataTable>
+            <h:commandButton value="登録" action="#{userInfoDetailManagedBean.moveUserInfoDetail(0)}"/>
+        </h:form>
     </h:body>
 </html>
 

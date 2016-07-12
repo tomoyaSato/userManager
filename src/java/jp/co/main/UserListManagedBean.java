@@ -7,15 +7,11 @@ package jp.co.main;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
-import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-
 import javax.inject.Named;
-import org.apache.jasper.tagplugins.jstl.ForEach;
-import org.jboss.weld.context.RequestContext;
+
 
 /**
  *
@@ -69,4 +65,5 @@ public class UserListManagedBean {
             userDataList.add(new userListTableBean(userInfo.getId(), userInfo.getName()));
         });
     }
+
 }

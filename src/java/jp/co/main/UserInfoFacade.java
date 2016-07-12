@@ -5,6 +5,7 @@
  */
 package jp.co.main;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -46,5 +47,24 @@ public class UserInfoFacade extends AbstractFacade<UserInfo> {
         }catch(Exception ex){
             throw ex;
         }
+    }
+    //新規追加
+    public void insert(UserInfo userInfoParam) {
+//        em.getTransaction().begin();
+        em.persist(userInfoParam);
+//        em.getTransaction().commit();
+    }
+    
+    // 更新
+    public void update(UserInfo userInfoParam){
+//        em.getTransaction().begin();
+        em.merge(userInfoParam);
+//        em.getTransaction().commit();
+    }
+    public String getNewId(){
+        Object id = em.createNamedQuery("UserInfo.getMaxId").getSingleResult();            
+        int idInt = Integer.valueOf(id.toString()) + 1;
+        String idStr = String.format("%1$5d", idInt);
+        return idStr;
     }
 }

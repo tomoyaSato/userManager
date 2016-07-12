@@ -1,12 +1,31 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>ユーザ情報管理システム</title>
+        <link rel="stylesheet" type="text/css" href="CSS/userInfoDetail.css"/>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <h:form>
+            <h:inputHidden value="#{userInfoDetailManagedBean.moveType}"/>
+            <h:inputHidden value="#{userInfoDetailManagedBean.hiddenPassword}"/>
+            <f:metadata>
+                <f:viewAction action="#{loginManagedBean.userListloginCheck()}"/>
+            </f:metadata>
+            <font class="title">
+                <h:outputText value="#{userInfoDetailManagedBean.outputTitle}" />
+            </font>
+            <h:commandButton id="logoutButton" value="ログアウト" /><br/>
+            
+            iD:<h:inputText value="#{userInfoDetailManagedBean.id}" /><br/>
+            Password:<h:inputSecret value="#{userInfoDetailManagedBean.password}" /><br/>
+            <h:selectBooleanCheckbox value="#{userInfoDetailManagedBean.isPasswordChange}" rendered="#{userInfoDetailManagedBean.rendereFlg}" /><h:outputText value="Passwordを変更する" rendered="#{userInfoDetailManagedBean.rendereFlg}" /><br/>
+            ユーザ名:<h:inputText value="#{userInfoDetailManagedBean.userName}" /><br/>
+            <h:commandButton value="戻る" action="#{userInfoDetailManagedBean.backUserList()}" />
+            <h:commandButton value="#{userInfoDetailManagedBean.buttonText}" action="#{userInfoDetailManagedBean.editData()}" />	
+        </h:form>
     </h:body>
 </html>
 
